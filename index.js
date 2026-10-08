@@ -81,3 +81,32 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
 });
+
+app.get('/test', (req, res) => {
+  res.send('API SERVER IS WORKING');
+});
+So the bottom should be:
+
+app.get('/api/shorturl/:short_url', (req, res) => {
+  const shortUrl = Number(req.params.short_url);
+
+  const entry = urls.find((u) => u.short_url === shortUrl);
+
+  if (!entry) {
+    return res.json({
+      error: 'No short URL found for given input'
+    });
+  }
+
+  res.redirect(entry.original_url);
+});
+
+app.get('/test', (req, res) => {
+  res.send('API SERVER IS WORKING');
+});
+
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+  console.log(`Listening on port ${PORT}`);
+});
