@@ -15,6 +15,10 @@ app.get('/', (req, res) => {
   res.sendFile(`${process.cwd()}/views/index.html`);
 });
 
+app.get('/test', (req, res) => {
+  res.send('API SERVER IS WORKING');
+});
+
 app.post('/api/shorturl', (req, res) => {
   const originalUrl = req.body.url;
 
